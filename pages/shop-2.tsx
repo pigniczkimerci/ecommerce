@@ -57,9 +57,9 @@ const ShopTwo: NextPage = () => {
                 </div>
 
                 <div className="row gx-md-8 gy-10 gy-md-13 mb-10">
-                 {/*} {products.map((item) => (
-                    <ProductCard {...item} key={item.id} className="col-md-6 col-xl-4" />
-                 ))} */}
+                 {products.map((item) => (
+                    <ProductCard manufacturer={''} canbeordered={''} deliveryday={''} {...item} key={item.id} className="col-md-6 col-xl-4" />
+                 ))}
                 </div>
 
                 {/* ========== pagination section ========== */}

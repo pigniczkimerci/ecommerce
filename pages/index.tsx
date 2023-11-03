@@ -9,7 +9,7 @@ import { Navbar } from 'components/blocks/navbar';
 import PageProgress from 'components/common/PageProgress';
 import AccordionList1 from 'components/common/AccordionList1';
 import NextLink from 'components/reuseable/links/NextLink';
-import { Hero, Hero15, Hero21 } from 'components/blocks/hero';
+import { Hero, Hero1, Hero15, Hero2, Hero21, Hero3 } from 'components/blocks/hero';
 import { clientList } from 'data/client';
 import { About1, About3 } from 'components/blocks/about';
 import { CTA4 } from 'components/blocks/call-to-action';
@@ -31,11 +31,11 @@ const Home: NextPage = () => {
       <PageProgress />
 
       {/* ========== header section ========== */}
-      <header className="wrapper bg-dark">
+      <header className="wrapper">
         <Navbar
           search
-          logoAlt="logo-light"
-          navClassName="navbar navbar-expand-lg center-nav transparent navbar-dark"
+          logoAlt="logo-dark"
+          navClassName="navbar navbar-expand-lg center-nav transparent navbar-light"
           button={<NextLink title="Contact" href="#" className="btn btn-sm btn-primary rounded" />}
         />
       </header>
@@ -49,15 +49,12 @@ const Home: NextPage = () => {
         <section className="wrapper bg-light">
           <div className="container-fullwidth">
             <Hero />
-            <section style={{ position: "relative", marginTop: "-150px", zIndex: "1"}}>
-              <SearchBar />
-            </section>
             
           </div>
         </section>
 
         <div className="wrapper bg-light bg-soft-primary">
-          <div className="container py-10 my-10">
+          <div className="container py-10 ">
             <Facts />
           </div>
         </div>

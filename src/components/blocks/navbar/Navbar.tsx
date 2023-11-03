@@ -79,21 +79,6 @@ const Navbar: FC<NavbarProps> = (props) => {
             </li>
           )}
 
-          {/* ============= search icon button ============= */}
-          <form className="form-inline .search_bar  w-100">
-            <div className="input-group md-form form-sm form-2 pl-0">
-              <input className="form-control my-0 py-1 " type="text" placeholder="Search" aria-label="Search" style={{ borderTopLeftRadius: '15px', borderBottomLeftRadius: '15px' }}/>
-              <div className="input-group-prepend bg-primary" style={{ borderTopRightRadius: '15px', borderBottomRightRadius: '15px' }}>
-                {search && (
-                  <li className="nav-item">
-                    <a className="nav-link" /*data-bs-toggle="offcanvas" data-bs-target="#offcanvas-search"*/ >
-                      <i className="uil uil-search p-1" id="nav"/>
-                    </a>
-                  </li>
-                )}
-                </div>
-            </div>
-          </form>
          
 
           {/* ============= contact button ============= 

@@ -5,84 +5,66 @@ import Typewriter from 'typewriter-effect';
 import useLightBox from 'hooks/useLightBox';
 import Carousel from 'components/reuseable/Carousel';
 import NextLink from 'components/reuseable/links/NextLink';
+import { clientList } from 'data/client';
+import useReplaceMe from 'hooks/useReplaceMe';
 
 const Hero3: FC = () => {
   // used for lightbox
-  useLightBox();
+  useReplaceMe();
 
   return (
-    <div className="wrapper bg-dark">
-      <Carousel
-        slidesPerView={1}
-        className="swiper-hero dots-over"
-        autoplay={{ delay: 7000, disableOnInteraction: false }}
-      >
-        <div
-          className="swiper-slide bg-overlay bg-overlay-400 bg-dark bg-image"
-          style={{ backgroundImage: 'url("/img/photos/dmitriy-demidov-iuuJC_pjLU0-unsplash.jpg")' }}
-        >
-          <div className="container h-100">
-            <div className="row h-100">
-              <div className="col-md-12 col-lg-9 col-xl-8 col-xxl-7 mx-auto text-center justify-content-center align-self-center">
-                <h2 className="display-1 fs-56 mb-4 text-white animate__animated animate__slideInDown animate__delay-1s">
-                    Minőségi alkatrészek egy kattintással.
-                </h2>
+<section className="wrapper bg-light">
+      <div className="container pt-10 pt-md-14 pb-14 pb-md-16 text-center">
+        <div className="row gx-lg-8 gx-xl-12 gy-10 gy-xl-0 mb-14 align-items-center">
+          <div className="col-lg-7 order-lg-2">
+            <figure>
+              <img
+                alt="demo"
+                className="img-auto"
+                src="/img/illustrations/i21.png"
+                srcSet="/img/illustrations/i21@2x.png 2x"
+              />
+            </figure>
+          </div>
 
-                <p className="lead fs-23 lh-sm mb-7 text-white animate__animated animate__slideInRight animate__delay-2s">
-                    Több ezer különböző alkatrész közül válogathatsz, és mindössze egy kattintással rendelheted meg, hogy minőségi termékekkel szereld fel eszközeidet.
-                </p>
+          <div className="col-md-10 offset-md-1 offset-lg-0 col-lg-5 text-center text-lg-start">
+            <h1 className="display-1 fs-54 mb-5 mx-md-n5 mx-lg-0 mt-7">
+              Kíváló termékek <br className="d-md-none" />
+              többféle kategóriákban <br className="d-md-none" />
+              <span className="rotator-fade text-primary">telefon, mosógép, alkatrészek</span>
+            </h1>
 
-                <div className="animate__animated animate__slideInUp animate__delay-3s">
-                  <NextLink title="Read More" href="#" className="btn btn-lg btn-outline-white rounded-pill" />
-                </div>
-              </div>
-            </div>
+            <p className="lead fs-lg mb-7">
+              Vásároljon még ma nálunk!
+            </p>
+
+            <span>
+              <a className="btn btn-lg btn-primary rounded-pill me-2">Termékek</a>
+            </span>
           </div>
         </div>
 
-        <div
-          className="swiper-slide bg-overlay bg-overlay-400 bg-dark bg-image"
-          style={{ backgroundImage: 'url("/img/photos/pexels-dan-cristian-pădureț-9966684.jpg")' }}
-        >
-          <div className="container h-100">
-            <div className="row h-100">
-              <div className="col-md-11 col-lg-8 col-xl-7 col-xxl-6 mx-auto text-center justify-content-center align-self-center">
-                <h2 className="display-1 fs-56 mb-4 text-white animate__animated animate__slideInDown animate__delay-1s">
-                    Minden alkatrész, amire szükséged van.
-                </h2>
-
-                <p className="lead fs-23 lh-sm mb-7 text-white animate__animated animate__slideInRight animate__delay-2s">
-                Az összes szükséges alkatrész megtalálható nálunk. Legyen szó elektronikai alkatrészekről, autóalkatrészekről vagy egyéb eszközökről, mi itt vagyunk, hogy segítsünk.
-                </p>
-              </div>
+        <p className="text-center mb-8">Több mint 2k termék.</p>
+        <div className="row row-cols-4 row-cols-md-4 row-cols-lg-7 row-cols-xl-7 gy-10 mb-2 d-flex align-items-center justify-content-center">
+          {clientList.map((item) => (
+            <div className="col" key={item}>
+              <img className="img-fluid px-md-3 px-lg-0 px-xl-2 px-xxl-5" src={item} alt="client" />
             </div>
-          </div>
+          ))}
         </div>
+      </div>
 
-        <div
-          className="swiper-slide bg-overlay bg-overlay-400 bg-dark bg-image"
-          style={{ backgroundImage: 'url("/img/photos/robin-glauser-aSvBypuXGkc-unsplash.jpg")' }}
-        >
-          <div className="container h-100">
-            <div className="row h-100">
-              <div className="col-md-10 offset-md-1 col-lg-7 offset-lg-0 col-xl-6 col-xxl-5 text-center text-lg-start justify-content-center align-self-center align-items-start">
-                <h2 className="display-1 fs-56 mb-4 text-white animate__animated animate__slideInDown animate__delay-1s">
-                    Megbízható alkatrészek gyors szállítással.
-                </h2>
-
-                <p className="lead fs-23 lh-sm mb-7 text-white animate__animated animate__slideInRight animate__delay-2s">
-                Rendszerünk gyors és megbízható szállítást biztosít, hogy ne kelljen sokáig várnod az új alkatrészeidre.
-                </p>
-
-                <div className="animate__animated animate__slideInUp animate__delay-3s">
-                  <NextLink title="Contact Us" href="#" className="btn btn-lg btn-outline-white rounded-pill" />
-                </div>
-              </div>
-            </div>
-          </div>
+      <div className="overflow-hidden">
+        <div className="divider text-soft-primary mx-n2">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 100">
+            <path
+              fill="currentColor"
+              d="M1260,1.65c-60-5.07-119.82,2.47-179.83,10.13s-120,11.48-180,9.57-120-7.66-180-6.42c-60,1.63-120,11.21-180,16a1129.52,1129.52,0,0,1-180,0c-60-4.78-120-14.36-180-19.14S60,7,30,7H0v93H1440V30.89C1380.07,23.2,1319.93,6.15,1260,1.65Z"
+            />
+          </svg>
         </div>
-      </Carousel>
-    </div>
+      </div>
+    </section>
   );
 };
 

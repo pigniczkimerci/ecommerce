@@ -203,7 +203,7 @@ const blocksNavigation = [
 /*Navigation data for navbar*/
 const page = [
   {id:0, title: 'Főoldal', url:"/"},
-  {id:1, title: 'Termékek', url: '/shop-3'},
+  {id:1, title: 'Termékek', url: '/shop-2'},
   {
     id: 2,
     url: null,
