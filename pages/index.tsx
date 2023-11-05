@@ -1,30 +1,14 @@
 import { Fragment, useEffect, useState } from 'react';
 import type { NextPage } from 'next';
-import axios from "axios";
-import {ProductCard1} from "../src/components/reuseable/product-cards";
-import CountUp from 'react-countup';
-import Typewriter from 'typewriter-effect';
-import { fadeInAnimate, slideInDownAnimate } from 'utils/animation';
 import { Navbar } from 'components/blocks/navbar';
 import PageProgress from 'components/common/PageProgress';
-import AccordionList1 from 'components/common/AccordionList1';
 import NextLink from 'components/reuseable/links/NextLink';
-import { Hero, Hero1, Hero15, Hero2, Hero21, Hero3 } from 'components/blocks/hero';
-import { clientList } from 'data/client';
-import { About1, About3 } from 'components/blocks/about';
-import { CTA4 } from 'components/blocks/call-to-action';
-import { Facts, Facts1, Facts10, Facts11, Facts12, Facts13, Facts14, Facts15, Facts16, Facts17, Facts2, Facts3, Facts4, Facts5, Facts6, Facts7, Facts8, Facts9 } from 'components/blocks/facts';
-import { Pricing3 } from 'components/blocks/pricing';
+import { Hero } from 'components/blocks/hero';
+import { Facts } from 'components/blocks/facts';
 import { Process } from 'components/blocks/process';
-import { Services4 } from 'components/blocks/services';
 import { Testimonial } from 'components/blocks/testimonial';
-import Blog1 from './blog-1';
-import Contact1 from './contact-1';
-import { SearchBar } from 'components/blocks/searchbar';
-import Breadcrumb from 'components/reuseable/Breadcrumb';
-import { breadcrumb } from 'data/cart-page';
 import ContactForm from 'components/common/ContactForm';
-import { Footer1, Footer10, Footer11, Footer12, Footer13, Footer14, Footer15, Footer16, Footer17, Footer18, Footer2, Footer3, Footer4, Footer5, Footer6, Footer7, Footer8, Footer9 } from 'components/blocks/footer';
+import { Footer5 } from 'components/blocks/footer';
 const Home: NextPage = () => {
   return (
     <Fragment>
