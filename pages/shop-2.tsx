@@ -1,5 +1,5 @@
 import { NextPage } from 'next';
-import { Fragment } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 // -------- custom component -------- //
 import Filter from 'components/common/Filter';
 import Select from 'components/reuseable/Select';
@@ -12,8 +12,35 @@ import { Footer8 } from 'components/blocks/footer';
 import { ProductCard } from 'components/reuseable/product-cards';
 // -------- data -------- //
 import products from 'data/product-list';
+import axios from 'axios';
+import { title } from 'process';
 
 const ShopTwo: NextPage = () => {
+
+const [product, setProduct] = useState<ProductType[]>([]);
+
+interface ProductType {
+  title: string;
+  id: string;
+  category: string;
+  description: string;
+  image: string;
+  price: number;
+  rating: Array<String>;
+}
+useEffect(() => {
+   axios.get('https://fakestoreapi.com/products')
+    .then(function (response) {
+      setProduct(response.data)
+      console.log(response.data);
+    }).catch(error => {
+      console.log(error);
+    });
+
+}, []);
+product.map((item) => (
+  console.log(item)
+))
   // filter options
   const options = [
     { id: 1, title: 'Sort by popularity', value: 'popular' },
@@ -57,8 +84,8 @@ const ShopTwo: NextPage = () => {
                 </div>
 
                 <div className="row gx-md-8 gy-10 gy-md-13 mb-10">
-                 {products.map((item) => (
-                    <ProductCard manufacturer={''} canbeordered={''} deliveryday={''} {...item} key={item.id} className="col-md-6 col-xl-4" />
+                 {product.map((item) => (
+                    <ProductCard imageUrl={item.image} title={item.title} category={item.category} regularPrice={item.price} id={item.id} manufacturer={''} canbeordered={''} deliveryday={''} className="col-md-6 col-xl-4" />
                  ))}
                 </div>
 

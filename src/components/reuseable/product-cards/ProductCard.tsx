@@ -24,7 +24,6 @@ type ProductCardProps = {
 
 const ProductCard: FC<ProductCardProps> = (props) => {
   const {id,manufacturer,canbeordered, deliveryday, image, imageUrl, title, new: newProduct, sale, category,  salePrice, regularPrice, className = '' } = props;
- 
   const saveProductToLocalStorage = () => {
     // Construct the product object with the details you want to save
     /*const productToSave = {
@@ -63,7 +62,7 @@ const ProductCard: FC<ProductCardProps> = (props) => {
       <div className="project_item productcard">
         <a href={`/products/${id}`}>
         <figure className="mb-6 position-relative overflow-hidden aspect-ratio-square">
-          <img src={imageUrl ? imageUrl : `/img/photos/${image}.jpg`} alt="" />
+          <img src={imageUrl} alt="" />
         </figure>
         </a>
         <div className="post-header">
