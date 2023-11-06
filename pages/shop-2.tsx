@@ -18,6 +18,7 @@ import { title } from 'process';
 const ShopTwo: NextPage = () => {
 
 const [product, setProduct] = useState<ProductType[]>([]);
+const [sortingOption, setSortingOption] = useState('asc')
 
 interface ProductType {
   title: string;
@@ -29,27 +30,25 @@ interface ProductType {
   rating: Array<String>;
 }
 useEffect(() => {
-   axios.get('https://fakestoreapi.com/products')
+  axios
+    .get(`https://fakestoreapi.com/products?sort=${sortingOption}`)
     .then(function (response) {
-      setProduct(response.data)
-      console.log(response.data);
-    }).catch(error => {
+      setProduct(response.data);
+    })
+    .catch(error => {
       console.log(error);
     });
+}, [sortingOption]);
 
-}, []);
-product.map((item) => (
-  console.log(item)
-))
+const handleSortingChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+  const selectedOption = event.target.value;
+  setSortingOption(selectedOption);
+};
   // filter options
   const options = [
-    { id: 1, title: 'Sort by popularity', value: 'popular' },
-    { id: 2, title: 'Sort by average rating', value: 'rating' },
-    { id: 3, title: 'Sort by newness', value: 'new' },
-    { id: 4, title: 'Sort by price: low to high', value: 'low-to-high' },
-    { id: 5, title: 'Sort by price: high to low', value: 'high-to-low' }
+    { id: 1, title: 'Sort by asc', value: 'asc' },
+    { id: 2, title: 'Sort by desc', value: 'desc' },
   ];
-
   return (
     <Fragment>
         <PageProgress />
@@ -79,7 +78,13 @@ product.map((item) => (
                   </div>
 
                   <div className="col-md-4 col-lg-3 ms-md-auto text-md-end mt-5 mt-md-0">
-                    <Select options={options} />
+                  <select className="form-select" onChange={handleSortingChange}>
+                    {options.map(({ value, id, title }) => (
+                      <option value={value} key={id}>
+                        {title}
+                      </option>
+                    ))}
+                  </select>
                   </div>
                 </div>
 
