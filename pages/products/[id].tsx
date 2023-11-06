@@ -18,33 +18,16 @@ import ThumbsCarousel from 'components/reuseable/ThumbsCarousel';
 import data from 'data/product-details-page';
 import { useRouter } from 'next/router';
 import axios from 'axios';
-
+//TODO: rating
 const ProductDetails: NextPage = () => {
-  interface Group{
-    vgruppenid: number;
-    vgruppenname: string;
-  }
   interface Product {
-    artikelaufschlag:string;
-    artikelbezeichnung: string;
-    artikelhersteller:string;
-    artikelmerkmal: Array<string>;
-    artikelnummer: string;
-    bestellbar: string;
-    bild: string;
-    ekpreis:string;
-    ersatzartikel: string;
-    fehlernummer:string;
-    gewicht:string;
-    lieferzeit:string;
-    lieferzeit_in_tagen: number;
-    morepics:string;
-    neuesessionid:string;
-    nurnachnahme:string;
-    storno_moeglich:string;
-    picurlbig:string;
-    thumbnailurl: string;
-    vgruppenbaum: Array<Group>;
+    title: string;
+    id: string;
+    category: string;
+    description: string;
+    image: string;
+    price: number;
+    rating: Array<String>;
   }
   
   //get id from router
@@ -52,18 +35,16 @@ const ProductDetails: NextPage = () => {
   const { id } = router.query;
   const [product, setProduct] = useState<Product | null>(null); 
 
- /* useEffect(() => {
+  useEffect(() => {
     if (id) {
-      axios.get('')
+      axios.get('https://fakestoreapi.com/products/' + id)
       .then(function (response) {
         setProduct(response.data as Product)
       }).catch(error => {
         console.log(error);
       });
     }
-  }, [id]);*/
-
-
+  }, [id]);
   /* Filling/updating the shopping basket*/
   /*const art = "warenkorb";
   const artnr = product?.id;
@@ -110,33 +91,23 @@ const ProductDetails: NextPage = () => {
           <div className="container py-14 py-md-16">
             <div className="row gx-md-8 gx-xl-12 gy-8">
               <div className="col-lg-6">
-                 <img src={product?.picurlbig} alt="product" width="100%"/>
+                 <img src={product?.image} alt="product" width="100%"/>
               </div>
               <div className="col-lg-6">
                 <div className="post-header mb-5">
                   <h2 className="post-title display-5">
                     <a href="#" className="link-dark">
-                       {product?.artikelbezeichnung}
+                       {product?.title}
                     </a>
                   </h2>
                   <p className="price fs-28 mb-5">
-                    <span className="amount">{product?.ekpreis} Ft</span>
+                    <span className="amount">{product?.price} Ft</span>
                   </p>
-                  <div className="row">
-                    <div className="col">
-                      <p className="fs-20">Gyártó:</p>
-                      <p className='fw-bold fs-18'>{product?.artikelhersteller}</p>
-                    </div>
-                    <div className="col">
-                      <p className="fs-20">Súly:</p>
-                      <p className='fw-bold fs-18'>{product?.gewicht} g</p>
-                    </div>
-                  </div>
+                  
                   <div className="col">
-                      <p>{product?.bestellbar === 'J' ? 'Raktáron' : 'Nincs készleten.'}</p>
                     </div>
                     <div className="col">
-                      <p>Szállítás {product?.lieferzeit_in_tagen} munkanap</p>
+                      <p>{product?.description}</p>
                     </div>
                   </div>
                <form onSubmit={handleFormSubmit}>
@@ -144,13 +115,6 @@ const ProductDetails: NextPage = () => {
                     <div className="col-lg-9 d-flex flex-row pt-2">
                       <div>
                         <div className="form-select-wrapper">
-                        <input
-                          type="number"
-                          className="form-input"
-                          value={quantity}
-                          onChange={(e) => setQuantity(+e.currentTarget.value)}
-                        />
-
                           <select
                             value={quantity}
                             className="form-select"
