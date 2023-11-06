@@ -30,10 +30,12 @@ interface ProductType {
   rating: Array<String>;
 }
 useEffect(() => {
+  console.log(sortingOption)
   axios
     .get(`https://fakestoreapi.com/products?sort=${sortingOption}`)
     .then(function (response) {
       setProduct(response.data);
+      console.log(response.data);
     })
     .catch(error => {
       console.log(error);
@@ -42,7 +44,20 @@ useEffect(() => {
 
 const handleSortingChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
   const selectedOption = event.target.value;
+  console.log()
   setSortingOption(selectedOption);
+};
+const applyFilters = (category: string) => {
+  console.log(category)
+  axios
+    .get(`https://fakestoreapi.com/products/category/${category}`)
+    .then(function (response) {
+      setProduct(response.data);
+      console.log(response.data);
+    })
+    .catch(error => {
+      console.log(error);
+    });
 };
   // filter options
   const options = [
@@ -99,7 +114,7 @@ const handleSortingChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
               </div>
 
               {/* ========== filter sidebar section ========== */}
-              <Filter />
+              <Filter applyFilters={applyFilters}/>
             </div>
           </div>
         </section>
