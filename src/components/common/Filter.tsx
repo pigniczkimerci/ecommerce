@@ -36,9 +36,7 @@ type FilterProps = {
 };
 
 const Filter: FC<FilterProps> = ({ applyFilters }) => {
-  /*const handleFilters = () => {
-    applyFilters(product);
-  };*/
+  
   const Title = (title: string) => <h4 className="widget-title mb-3">{title}</h4>;
 
   return (
