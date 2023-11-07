@@ -18,7 +18,8 @@ import { title } from 'process';
 const ShopTwo: NextPage = () => {
 
 const [product, setProduct] = useState<ProductType[]>([]);
-const [sortingOption, setSortingOption] = useState('asc')
+const [sortingOption, setSortingOption] = useState('asc');
+const [category, setCategory] = useState('');
 
 interface ProductType {
   title: string;
@@ -30,34 +31,29 @@ interface ProductType {
   rating: Array<String>;
 }
 useEffect(() => {
-  console.log(sortingOption)
   axios
-    .get(`https://fakestoreapi.com/products?sort=${sortingOption}`)
+    .get(`https://fakestoreapi.com/products${category}?sort=${sortingOption}`)
     .then(function (response) {
       setProduct(response.data);
-      console.log(response.data);
     })
     .catch(error => {
       console.log(error);
     });
-}, [sortingOption]);
+}, [ category, sortingOption]);
 
 const handleSortingChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
   const selectedOption = event.target.value;
-  console.log()
   setSortingOption(selectedOption);
+  if (category) {
+    applyFilters(category);
+  }
 };
-const applyFilters = (category: string) => {
-  console.log(category)
-  axios
-    .get(`https://fakestoreapi.com/products/category/${category}`)
-    .then(function (response) {
-      setProduct(response.data);
-      console.log(response.data);
-    })
-    .catch(error => {
-      console.log(error);
-    });
+const applyFilters = (selectedCategory: string) => {
+  let updatedCategory = selectedCategory;
+  if (!selectedCategory.includes("/category/")) {
+    updatedCategory = "/category/" + selectedCategory;
+  }
+  setCategory(updatedCategory);
 };
   // filter options
   const options = [
