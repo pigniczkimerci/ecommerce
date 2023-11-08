@@ -79,33 +79,6 @@ const Navbar: FC<NavbarProps> = (props) => {
             </li>
           )}
 
-         
-
-          {/* ============= contact button ============= 
-          {button && <li className="nav-item d-none d-md-block">{button}</li>}*/}
-
-          {/* ============= shopping cart button ============= */}
-          {cart && (
-            <li className="nav-item">
-              <Link
-                /*Show left side*/
-                /*  data-bs-toggle="offcanvas" 
-                  data-bs-target="#offcanvas-cart"*/
-                className="nav-link position-relative d-flex flex-row align-items-center"
-                href="/cart"
-              >
-                <div>
-                  <i className="uil uil-shopping-cart" />
-                  <span className="badge badge-cart bg-primary">3</span>
-                </div>
-              </Link>
-            </li>
-          )}
-
-
-          {/* ============= social icons link ============= 
-          {social && <Social />}*/}
-
           {/* ============= humburger button for small device ============= */}
           <li className="nav-item d-lg-none">
             <button data-bs-toggle="offcanvas" data-bs-target="#offcanvas-nav" className="hamburger offcanvas-nav-btn">
@@ -157,7 +130,17 @@ const Navbar: FC<NavbarProps> = (props) => {
         </div>
       </div>
 
-      
+      {/* ============= shopping cart button ============= */}
+      <section>
+        {cart && (
+          <Link href="/cart">
+            <a className="nav-link position-relative d-flex flex-row align-items-center">
+              <i className="uil uil-shopping-cart" />
+              <span className="badge badge-cart bg-primary">3</span>
+            </a>
+          </Link>
+        )}
+      </section>
     </Fragment>
   );
 
