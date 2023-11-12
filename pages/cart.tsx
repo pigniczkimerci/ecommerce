@@ -9,9 +9,35 @@ import Breadcrumb from 'components/reuseable/Breadcrumb';
 import PageProgress from 'components/common/PageProgress';
 import CartListItem from 'components/reuseable/CartListItem';
 // -------- data -------- //
-import { breadcrumb, cartList, orderSummeryRow, tableHeading } from 'data/cart-page';
-
+import { breadcrumb,  tableHeading } from 'data/cart-page';
+import axios from 'axios';
 const Cart: NextPage = () => {
+  const [cartList, setCartList] = useState<Cart | null>(null);
+
+  interface ProductType {
+    productId: string;
+    quantity: number;
+  }
+  interface Cart{
+    id: string;
+    userId: string;
+    date: Date;
+    products: Array<ProductType>;
+  }
+
+  useEffect(() => {
+    axios
+    .get(`https://fakestoreapi.com/carts/1`)
+    .then(function (response) {
+      const data = response.data;
+      setCartList(response.data as Cart);
+    
+    })
+    .catch(error => {
+      console.log(error);
+    });
+  }, []);
+ 
   return (
     <Fragment>
       <div>
@@ -29,7 +55,6 @@ const Cart: NextPage = () => {
             <Breadcrumb data={breadcrumb} className="mb-0" />
           </div>
         </section>
-
         <div className="wrapper bg-light">
           <div className="container pt-12 pt-md-14 pb-14 pb-md-16">
             <div className="row gx-md-8 gx-xl-12 gy-12">
@@ -54,9 +79,16 @@ const Cart: NextPage = () => {
                     </thead>
 
                     <tbody>
-                      {cartList.map((item) => (
-                        <CartListItem key={item.id} {...item} />
-                      ))}
+                    {cartList?.products?.map((product) => (
+                      <CartListItem key={product.productId} cartId={cartList.id} userId={cartList.userId} date={cartList.date} products={cartList.products} />
+                    ))}
+                      {/*<CartListItem {...cartList}/> */}
+                      {/*<CartListItem key={item.id} cartId={item.id} {...item} /> */}
+                   {/* {cartList.map((item) => (
+                      
+                      <p>{item.id}</p>
+                   ))} */}
+
                     </tbody>
                   </table>
                 </div>
@@ -85,7 +117,7 @@ const Cart: NextPage = () => {
                 <div className="table-responsive">
                   <table className="table table-order">
                     <tbody>
-                      {orderSummeryRow.map(({ name, value }) => (
+                      {/*{orderSummeryRow.map(({ name, value }) => (
                         <tr key={name}>
                           <td className="ps-0">
                             <strong className="text-dark">{name}</strong>
@@ -98,7 +130,7 @@ const Cart: NextPage = () => {
                             </p>
                           </td>
                         </tr>
-                      ))}
+                      ))} */}
                     </tbody>
                   </table>
                 </div>

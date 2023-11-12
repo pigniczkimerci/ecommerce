@@ -14,6 +14,7 @@ import { ProductCard } from 'components/reuseable/product-cards';
 import products from 'data/product-list';
 import axios from 'axios';
 import { title } from 'process';
+import { type } from 'os';
 
 const ShopTwo: NextPage = () => {
 
@@ -40,7 +41,6 @@ useEffect(() => {
       console.log(error);
     });
 }, [ category, sortingOption]);
-
 const handleSortingChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
   const selectedOption = event.target.value;
   setSortingOption(selectedOption);
