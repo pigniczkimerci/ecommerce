@@ -6,21 +6,30 @@ import NextLink from './links/NextLink';
 import axios from 'axios';
 import Cart from '../../../pages/cart';
 
-interface CartItemListProps {
+/*interface CartItemListProps {
   cartList: typeof Cart[]; // Assuming Cart is defined somewhere
-}
+}*/
 // =============================================================
 interface ProductType {
   productId: string;
   quantity: number;
 }
-interface CartListItemProps{
+/*interface CartListItemProps{
   cartId: string;
+  userId: string;
+  date: Date;
+  products: Array<ProductType>;
+}*/
+interface Cart {
+  id: string;
   userId: string;
   date: Date;
   products: Array<ProductType>;
 }
 
+interface CartListItemProps {
+  cart: Cart |null;
+}
 interface ProductList {
   title: string;
   productId: string;
@@ -29,76 +38,70 @@ interface ProductList {
   image: string;
   price: number;
   rating: Array<String>;
+  quantity: number;
 }
 // =============================================================
 
 const CartListItem: FC<CartListItemProps> = (props) => {
-  const { cartId, userId, date, products } = props;
+  const { cart } = props;
   const [productList, setProductList] = useState<ProductList[]>([]);
 
 useEffect(() => {
-  // Function to fetch product details for a given productId
-  const fetchProductDetails = async (productId: string) => {
-    try {
-      const response = await axios.get(`https://fakestoreapi.com/products/${productId}`);
-      console.log(productId)
-      const productDetails = response.data as ProductList;
-      setProductList((prevList) => [...prevList, productDetails]);
-    } catch (error) {
-      console.error(`Error fetching product details for productId ${productId}:`, error);
-    }
-  };
-  products.forEach((product) => {
-    fetchProductDetails(product.productId);
-  });
-}, [products]);
-
+  if (cart) {
+    const fetchProductDetails = async (productId: string, quantity: number) => {
+      try {
+        const response = await axios.get(`https://fakestoreapi.com/products/${productId}`);
+        const productDetails = response.data as ProductList;
+        productDetails.quantity = quantity;
+        setProductList((prevList) => [...prevList, productDetails]);
+      } catch (error) {
+        console.error(`Error fetching product details for productId ${productId}:`, error);
+      }
+    };
+    cart.products.forEach((product) => {
+      fetchProductDetails(product.productId, product.quantity);
+    });
+  }
+}, [cart]);
+console.log(productList)
   return (
-    <tr>
-    {productList.map((product) => (
-      <Fragment key={product.productId}>
-        <td className="option text-start d-flex flex-row align-items-center ps-0">
-          <figure className="rounded w-17">
-            <Link href="#">
-              <a>
-                {/*<Image width={90} height={100} src={product.image} alt={product.title} /> */}
-              </a>
-            </Link>
-          </figure>
-
-          <div className="w-100 ms-4">
+    <>
+      {productList.map((product, index) => (
+        <tr key={index}>
+          <td className="option text-start d-flex flex-row align-items-center ps-0">
+            <img src={product.image} alt="img" width={'80px'} className='m-1'/>
             <h5 className="product-title">{product.title}</h5>
-            <p className="product-category">{product.category}</p>
-            <p className="product-description">{product.description}</p>
-          </div>
-        </td>
+          </td>
 
-        <td>
-          <p className="price">{currency(product.price)}</p>
-        </td>
+          <td>
+            <p className="price">{product.price}$</p>
+          </td>
 
-        <td>
-          <div className="form-select-wrapper">
-            <select className="form-select form-select-sm mx-auto" defaultValue={1}>
-              {[1, 2, 3, 4, 5].map((item) => (
-                <option key={item} value={item}>
-                  {item}
-                </option>
-              ))}
-            </select>
-          </div>
-        </td>
+          <td>
+            <div className="form-select-wrapper">
+              <select
+                className="form-select form-select-sm mx-auto"
+                defaultValue= {product.quantity}
+              >
+                {[1, 2, 3, 4, 5].map((item) => (
+                  <option key={item} value={item}>
+                    {item}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </td>
 
-        <td>
-          {/* Render the total price or any other product-specific information */}
-        </td>
+          <td>
+            
+          </td>
 
-        <td className="pe-0">
-          <NextLink title={<i className="uil uil-trash-alt" />} href="#" className="link-dark" />
-        </td>
-      </Fragment>
-    ))}
-  </tr>
+          <td className="pe-0">
+            <NextLink title={<i className="uil uil-trash-alt" />} href="#" className="link-dark" />
+          </td>
+        </tr>
+      ))}
+    </>
   );
 };
 

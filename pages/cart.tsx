@@ -29,15 +29,12 @@ const Cart: NextPage = () => {
     axios
     .get(`https://fakestoreapi.com/carts/1`)
     .then(function (response) {
-      const data = response.data;
       setCartList(response.data as Cart);
-    
     })
     .catch(error => {
       console.log(error);
     });
   }, []);
- 
   return (
     <Fragment>
       <div>
@@ -79,9 +76,11 @@ const Cart: NextPage = () => {
                     </thead>
 
                     <tbody>
-                    {cartList?.products?.map((product) => (
+                    
+                    {/*{cartList?.products?.map((product) => (
                       <CartListItem key={product.productId} cartId={cartList.id} userId={cartList.userId} date={cartList.date} products={cartList.products} />
-                    ))}
+                    ))}*/}
+                    <CartListItem key={cartList?.id} cart={cartList}></CartListItem>
                       {/*<CartListItem {...cartList}/> */}
                       {/*<CartListItem key={item.id} cartId={item.id} {...item} /> */}
                    {/* {cartList.map((item) => (
