@@ -62,8 +62,16 @@ useEffect(() => {
       fetchProductDetails(product.productId, product.quantity);
     });
   }
-}, [cart]);
-console.log(productList)
+}, [cart ]);
+const handleQuantityChange = (index: number,oldPrice: number, newQuantity: number) => {
+  console.log(index + " " + newQuantity + " " + oldPrice)
+  setProductList((prevList) =>
+    prevList.map((product, i) =>
+      i === index ? { ...product, quantity: newQuantity, price: oldPrice * newQuantity  } : product
+    )
+  );
+ 
+};
   return (
     <>
       {productList.map((product, index) => (
@@ -82,8 +90,9 @@ console.log(productList)
               <select
                 className="form-select form-select-sm mx-auto"
                 defaultValue= {product.quantity}
+                onChange={(e) => handleQuantityChange(index, product.price, parseInt(e.target.value))}
               >
-                {[1, 2, 3, 4, 5].map((item) => (
+                {[1, 2, 3, 4, 5, 6].map((item) => (
                   <option key={item} value={item}>
                     {item}
                   </option>
