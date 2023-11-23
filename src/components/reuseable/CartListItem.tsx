@@ -64,13 +64,17 @@ useEffect(() => {
   }
 }, [cart ]);
 const handleQuantityChange = (index: number,oldPrice: number, newQuantity: number) => {
-  console.log(index + " " + newQuantity + " " + oldPrice)
   setProductList((prevList) =>
-    prevList.map((product, i) =>
-      i === index ? { ...product, quantity: newQuantity, price: oldPrice * newQuantity  } : product
-    )
-  );
- 
+      prevList.map((product, i) => {
+        if (i === index) {
+          let price = 0;
+          let oneProductPrice = oldPrice / product.quantity;
+          price = oneProductPrice * newQuantity;
+          return { ...product, quantity: newQuantity, price: Math.round(price * 100) / 100 };
+        }
+        return product;
+      })
+    );
 };
   return (
     <>
